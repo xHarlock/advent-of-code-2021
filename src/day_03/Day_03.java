@@ -1,6 +1,6 @@
 package day_03;
 
-import java.util.List;
+import java.util.Arrays;
 
 import utils.AdventDay;
 import utils.Reader;
@@ -19,7 +19,7 @@ public class Day_03 extends AdventDay {
 		String epsilon = "";
 
 		for (int i = 0; i < input[0].length(); i++) {
-			int bit = findMostCommonBit(input, i);
+			int bit = getMCB(input, i);
 			gamma += bit;
 			epsilon += bit == 1 ? 0 : 1;
 		}
@@ -27,35 +27,29 @@ public class Day_03 extends AdventDay {
 		return Integer.parseInt(gamma, 2) * Integer.parseInt(epsilon, 2);
 	}
 
-	public static long part_2(String[] input) {
-		List<String> list = arrayToList(input);
+	public static int part_2(String[] input) {
+		String[] o2_array = Arrays.copyOf(input, input.length);
+		String[] co2_array = Arrays.copyOf(input, input.length);
 
 		for (int i = 0; i < input[0].length(); i++) {
-			if (list.size() == 1)
-				break;
-
-			int most_common = findMostCommonBit(list, i);
 			int index = i;
-			list = list.stream().filter(s -> equals(s.charAt(index), most_common)).toList();
+
+			if (o2_array.length > 1) {
+				// mcb = Most common bit
+				int mcb = getMCB(o2_array, i);
+				o2_array = Arrays.stream(o2_array).filter(s -> equals(s.charAt(index), mcb)).toArray(String[]::new);
+			}
+
+			if (co2_array.length > 1) {
+				// lcb = Least common bit
+				int lcb = getMCB(co2_array, i) == 1 ? 0 : 1;
+				co2_array = Arrays.stream(co2_array).filter(s -> equals(s.charAt(index), lcb)).toArray(String[]::new);
+			}
 		}
-
-		String oxygen = list.get(0);
-		list = arrayToList(input);
-
-		for (int i = 0; i < input[0].length(); i++) {
-			if (list.size() == 1)
-				break;
-
-			int least_common = findMostCommonBit(list, i) == 1 ? 0 : 1;
-			int index = i;
-			list = list.stream().filter(s -> equals(s.charAt(index), least_common)).toList();
-		}
-
-		String co2 = list.get(0);
-		return Long.parseLong(oxygen, 2) * Long.parseLong(co2, 2);
+		return Integer.parseInt(o2_array[0], 2) * Integer.parseInt(co2_array[0], 2);
 	}
 
-	private static int findMostCommonBit(String[] array, int index) {
+	private static int getMCB(String[] array, int index) {
 		int count = 0;
 		for (int j = 0; j < array.length; j++) {
 			char[] chars = array[j].toCharArray();
@@ -63,16 +57,6 @@ public class Day_03 extends AdventDay {
 				count++;
 		}
 		return count >= array.length - count ? 1 : 0;
-	}
-
-	private static int findMostCommonBit(List<String> list, int index) {
-		int count = 0;
-		for (int j = 0; j < list.size(); j++) {
-			char[] chars = list.get(j).toCharArray();
-			if (chars[index] == '1')
-				count++;
-		}
-		return count >= list.size() - count ? 1 : 0;
 	}
 
 	private static boolean equals(char c, int i) {
