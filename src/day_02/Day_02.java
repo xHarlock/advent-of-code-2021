@@ -6,17 +6,17 @@ import utils.Reader;
 public class Day_02 extends AdventDay {
 
 	public static void main(String[] args) {
-		String[] lines = Reader.getInput(2, 2021);
+		String[] input = Reader.getInput(2, 2021);
 
-		System.out.println(part_1(lines));
-		System.out.println(part_2(lines));
+		System.out.println(part_1(input));
+		System.out.println(part_2(input));
 	}
 
-	public static int part_1(String[] lines) {
+	public static int part_1(String[] input) {
 		int x = 0;
 		int depth = 0;
 
-		for (String s : lines) {
+		for (String s : input) {
 			String[] args = s.split(" ");
 
 			if (args[0].equals("forward"))
@@ -30,12 +30,12 @@ public class Day_02 extends AdventDay {
 		return x * depth;
 	}
 
-	public static long part_2(String[] lines) {
+	public static long part_2(String[] input) {
 		long horizontal = 0;
 		long aim = 0;
 		long depth = 0;
 
-		for (String s : lines) {
+		for (String s : input) {
 			String[] args = s.split(" ");
 
 			if (args[0].equals("forward")) {
