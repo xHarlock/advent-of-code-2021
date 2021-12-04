@@ -49,6 +49,9 @@ public class Day_03 extends AdventDay {
 		return Integer.parseInt(o2_array[0], 2) * Integer.parseInt(co2_array[0], 2);
 	}
 
+	/**
+	 * Returns the most common bit of all strings at a given index
+	 */
 	private static int getMCB(String[] array, int index) {
 		int count = 0;
 		for (int j = 0; j < array.length; j++) {
