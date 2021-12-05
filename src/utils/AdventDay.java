@@ -20,4 +20,13 @@ public class AdventDay {
 	public static int[] listToArray(List<Integer> list) {
 		return list.stream().mapToInt(k -> k).toArray();
 	}
+	
+	public static void print2DArray(int[][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++)
+				System.out.print(array[i][j] + " ");
+
+			System.out.print("\n");
+		}
+	}
 }

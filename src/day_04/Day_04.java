@@ -49,7 +49,6 @@ public class Day_04 extends AdventDay {
 
 		for (int i = 0; i < drawn.length; i++) {
 			for (Board board : boards) {
-
 				if (board.finished)
 					continue;
 
