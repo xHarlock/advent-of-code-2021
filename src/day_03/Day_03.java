@@ -23,7 +23,7 @@ public class Day_03 extends AdventDay {
 			gamma += bit;
 			epsilon += bit == 1 ? 0 : 1;
 		}
-
+		
 		return Integer.parseInt(gamma, 2) * Integer.parseInt(epsilon, 2);
 	}
 
