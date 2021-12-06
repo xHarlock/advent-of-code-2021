@@ -23,24 +23,24 @@ public class Day_06 extends AdventDay {
 	}
 
 	private static long runSimulation(int days, String input) {
-		long[] school = new long[9];
+		long[] fishes = new long[9];
 
 		for (String s : input.split(","))
-			school[Integer.parseInt(s)]++;
+			fishes[Integer.parseInt(s)]++;
 
 		for (int day = 0; day < days; day++) {
-			long[] new_school = new long[9];
+			long[] fishes_new = new long[9];
 
 			for (int i = 0; i < 9; i++) {
 				if (i == 0) {
-					new_school[6] += school[0];
-					new_school[8] += school[0];
+					fishes_new[6] += fishes[0];
+					fishes_new[8] += fishes[0];
 				} else {
-					new_school[i - 1] += school[i];
+					fishes_new[i - 1] += fishes[i];
 				}
 			}
-			school = new_school;
+			fishes = fishes_new;
 		}
-		return Arrays.stream(school).sum();
+		return Arrays.stream(fishes).sum();
 	}
 }
