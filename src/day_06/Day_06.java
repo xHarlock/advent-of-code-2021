@@ -8,25 +8,25 @@ import utils.Reader;
 public class Day_06 extends AdventDay {
 
 	public static void main(String[] args) {
-		String[] input = Reader.getInput(6, 2021);
-		
-		System.out.println(part_1(input[0]));
-		System.out.println(part_2(input[0]));
+		int[] input = convert(Reader.getInput(6, 2021)[0].split(","));
+
+		System.out.println(part_1(input));
+		System.out.println(part_2(input));
 	}
 
-	public static long part_1(String input) {
+	public static long part_1(int[] input) {
 		return runSimulation(80, input);
 	}
 
-	public static long part_2(String input) {
+	public static long part_2(int[] input) {
 		return runSimulation(256, input);
 	}
 
-	private static long runSimulation(int days, String input) {
+	private static long runSimulation(int days, int[] input) {
 		long[] fishes = new long[9];
 
-		for (String s : input.split(","))
-			fishes[Integer.parseInt(s)]++;
+		for (int i : input)
+			fishes[i]++;
 
 		for (int day = 0; day < days; day++) {
 			long[] fishes_new = new long[9];
