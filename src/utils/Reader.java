@@ -82,19 +82,14 @@ public class Reader {
 		cookie.setPath("/");
 		cookie.setVersion(0);
 
-		try {
-			((CookieManager) CookieHandler.getDefault()).getCookieStore().add(new URI("https://adventofcode.com"), cookie);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		HttpClient client = HttpClient.newBuilder().cookieHandler(CookieHandler.getDefault()).connectTimeout(Duration.ofSeconds(10)).build();
-		HttpRequest req = HttpRequest.newBuilder().uri(URI.create("https://adventofcode.com/" + year + "/day/" + day + "/input")).GET().build();
 		String body = "Error";
 		
 		try {
+			((CookieManager) CookieHandler.getDefault()).getCookieStore().add(new URI("https://adventofcode.com"), cookie);
+			HttpClient client = HttpClient.newBuilder().cookieHandler(CookieHandler.getDefault()).connectTimeout(Duration.ofSeconds(10)).build();
+			HttpRequest req = HttpRequest.newBuilder().uri(URI.create("https://adventofcode.com/" + year + "/day/" + day + "/input")).GET().build();
 			body = client.send(req, HttpResponse.BodyHandlers.ofString()).body();
-		} catch (IOException | InterruptedException e) {
+		} catch (URISyntaxException | IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		

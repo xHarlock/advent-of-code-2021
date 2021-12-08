@@ -34,4 +34,9 @@ public class AdventDay {
 		for (Integer c : map.keySet())
 			System.out.println(c + ": " + map.get(c));
 	}
+
+	public static void printMap2(Map<String, Integer> map) {
+		for (String s : map.keySet())
+			System.out.println(s + ": " + map.get(s));
+	}
 }
