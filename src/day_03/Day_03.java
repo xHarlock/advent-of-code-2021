@@ -3,31 +3,26 @@ package day_03;
 import java.util.Arrays;
 
 import utils.AdventDay;
-import utils.Reader;
 
 public class Day_03 extends AdventDay {
 
-	public static void main(String[] args) {
-		String[] input = Reader.getInput(3, 2021);
-
-		System.out.println(part_1(input));
-		System.out.println(part_2(input));
-	}
-
-	public static long part_1(String[] input) {
+	private String[] input;
+	
+	@Override
+	public long part_1() {
 		String gamma = "";
 		String epsilon = "";
-
+		
 		for (int i = 0; i < input[0].length(); i++) {
 			int bit = getMCB(input, i);
 			gamma += bit;
 			epsilon += bit == 1 ? 0 : 1;
 		}
-		
 		return Integer.parseInt(gamma, 2) * Integer.parseInt(epsilon, 2);
 	}
 
-	public static int part_2(String[] input) {
+	@Override
+	public long part_2() {
 		String[] o2_array = Arrays.copyOf(input, input.length);
 		String[] co2_array = Arrays.copyOf(input, input.length);
 
@@ -52,7 +47,7 @@ public class Day_03 extends AdventDay {
 	/**
 	 * Returns the most common bit of all strings at a given index
 	 */
-	private static int getMCB(String[] array, int index) {
+	private int getMCB(String[] array, int index) {
 		int count = 0;
 		for (int j = 0; j < array.length; j++) {
 			char[] chars = array[j].toCharArray();
@@ -62,7 +57,12 @@ public class Day_03 extends AdventDay {
 		return count >= array.length - count ? 1 : 0;
 	}
 
-	private static boolean equals(char c, int i) {
+	private boolean equals(char c, int i) {
 		return Integer.parseInt(String.valueOf(c)) == i;
+	}
+
+	@Override
+	public void initialize(String[] input) {
+		this.input = input;
 	}
 }

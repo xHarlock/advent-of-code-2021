@@ -5,23 +5,17 @@ import java.util.List;
 import java.util.Scanner;
 
 import utils.AdventDay;
-import utils.Reader;
 
 public class Day_04 extends AdventDay {
 
-	private static int[] drawn;
-	private static List<Board> boards;
+	private String[] input;
+	private int[] drawn;
+	private List<Board> boards;
 
-	public static void main(String[] args) {
-		String[] input = Reader.getInput(4, 2021);
-
-		System.out.println(part_1(input));
-		System.out.println(part_2(input));
-	}
-
-	public static int part_1(String[] input) {
+	@Override
+	public long part_1() {
 		initialize(input);
-		
+
 		Board winner = null;
 
 		for (int i = 0; i < drawn.length; i++) {
@@ -34,17 +28,16 @@ public class Day_04 extends AdventDay {
 					break;
 				}
 			}
-
 			if (winner != null)
 				break;
 		}
-
 		return winner.sum * winner.last;
 	}
 
-	public static int part_2(String[] input) {
+	@Override
+	public long part_2() {
 		initialize(input);
-		
+
 		Board last_winner = null;
 
 		for (int i = 0; i < drawn.length; i++) {
@@ -65,11 +58,12 @@ public class Day_04 extends AdventDay {
 		return last_winner.sum * last_winner.last;
 	}
 
-	private static void initialize(String[] input) {
+	@Override
+	public void initialize(String[] input) {
+		this.input = input;
 		String[] groups = String.join("\n", input).split("\n\n");
-		drawn = convert(groups[0].split(","));
+		drawn = toIntArray(groups[0].split(","));
 		boards = new ArrayList<>();
-
 		for (int i = 1; i < groups.length; i++)
 			boards.add(new Board(groups[i].split("\n")));
 	}
@@ -88,12 +82,10 @@ class Board {
 
 		for (int i = 0; i < 5; i++) {
 			Scanner scanner = new Scanner(lines[i]);
-			
 			for (int j = 0; j < 5; j++) {
 				values[i][j] = scanner.nextInt();
 				sum += values[i][j];
 			}
-			
 			scanner.close();
 		}
 	}
@@ -119,11 +111,9 @@ class Board {
 				if (hits[j][i] == false)
 					wins_col = false;
 			}
-
 			if (wins_row || wins_col)
 				return true;
 		}
-		
 		return false;
 	}
 }

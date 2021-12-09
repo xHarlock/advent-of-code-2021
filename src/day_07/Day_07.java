@@ -3,18 +3,13 @@ package day_07;
 import java.util.Arrays;
 
 import utils.AdventDay;
-import utils.Reader;
 
 public class Day_07 extends AdventDay {
 
-	public static void main(String[] args) {		
-		int[] input = convert(Reader.getInput(7, 2021)[0].split(","));
+	private int[] input;
 
-		System.out.println(part_1(input));
-		System.out.println(part_2(input));
-	}
-
-	public static int part_1(int[] input) {
+	@Override
+	public long part_1() {
 		int[] array = new int[input.length];
 		int max_pos = Arrays.stream(input).max().getAsInt();
 		int cheapest = Integer.MAX_VALUE;
@@ -31,7 +26,8 @@ public class Day_07 extends AdventDay {
 		return cheapest;
 	}
 
-	public static int part_2(int[] input) {
+	@Override
+	public long part_2() {
 		int[] array = new int[input.length];
 		int max_pos = Arrays.stream(input).max().getAsInt();
 		int cheapest = Integer.MAX_VALUE;
@@ -41,12 +37,16 @@ public class Day_07 extends AdventDay {
 				int cost = Math.abs(i - input[j]);
 				array[j] = cost * (cost + 1) / 2;
 			}
-
 			int fuel = Arrays.stream(array).sum();
 
 			if (fuel < cheapest)
 				cheapest = fuel;
 		}
 		return cheapest;
+	}
+
+	@Override
+	public void initialize(String[] input) {
+		this.input = toIntArray(input[0].split(","));
 	}
 }
