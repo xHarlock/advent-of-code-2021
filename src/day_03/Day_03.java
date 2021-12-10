@@ -44,6 +44,11 @@ public class Day_03 extends AdventDay {
 		return Integer.parseInt(o2_array[0], 2) * Integer.parseInt(co2_array[0], 2);
 	}
 
+	@Override
+	public void initialize(String[] input) {
+		this.input = input;
+	}
+	
 	/**
 	 * Returns the most common bit of all strings at a given index
 	 */
@@ -59,10 +64,5 @@ public class Day_03 extends AdventDay {
 
 	private boolean equals(char c, int i) {
 		return Integer.parseInt(String.valueOf(c)) == i;
-	}
-
-	@Override
-	public void initialize(String[] input) {
-		this.input = input;
 	}
 }

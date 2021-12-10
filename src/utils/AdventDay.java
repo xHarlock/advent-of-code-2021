@@ -3,6 +3,7 @@ package utils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class AdventDay {
 
@@ -11,6 +12,11 @@ public abstract class AdventDay {
 	public abstract long part_2();
 
 	public abstract void initialize(String[] input);
+
+	/** Method that runs a subprogram, such as a visualization */
+	public void runSpecial() {
+		System.out.println("Nothing special!");
+	}
 
 	public int[] toIntArray(String[] input) {
 		return Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
@@ -23,7 +29,7 @@ public abstract class AdventDay {
 				grid[i][j] = Integer.parseInt(String.valueOf(input[i].charAt(j)));
 		return grid;
 	}
-	
+
 	public List<Integer> arrayToList(int[] array) {
 		return Arrays.stream(array).boxed().toList();
 	}
@@ -34,6 +40,10 @@ public abstract class AdventDay {
 
 	public int[] listToArray(List<Integer> list) {
 		return list.stream().mapToInt(k -> k).toArray();
+	}
+
+	public <T> Map<T, T> swap(Map<T, T> map) {
+		return map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
 	}
 
 	public int[][] clone(int[][] array) {

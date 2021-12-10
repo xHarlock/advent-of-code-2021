@@ -11,6 +11,7 @@ import day_06.Day_06;
 import day_07.Day_07;
 import day_08.Day_08;
 import day_09.Day_09;
+import day_10.Day_10;
 import utils.AdventDay;
 import utils.Reader;
 
@@ -22,8 +23,8 @@ public class Main {
 		days = new ArrayList<>();
 		addAllDays();
 
-		print(9, true);
-		//printAll();
+		//print(10, false);
+		printAll();
 	}
 
 	static void print(int day_no, boolean test) {
@@ -67,5 +68,6 @@ public class Main {
 		days.add(new Day_07());
 		days.add(new Day_08());
 		days.add(new Day_09());
+		days.add(new Day_10());
 	}
 }
