@@ -40,7 +40,7 @@ public class Day_09 extends AdventDay {
 		int[][] raw_grid = toGrid(input);
 		this.grid = new Node[raw_grid.length][raw_grid[0].length];
 
-		// Convert elements of the grid into nodes and connects them
+		// Convert grid elements to nodes and connect them
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
 				Node node = new Node(j, i, raw_grid[i][j]);
@@ -67,7 +67,7 @@ public class Day_09 extends AdventDay {
 		
 		node.height = -1;
 		
-		long size = 0;		
+		long size = 0;
 		for (Node n : node.neighbours)
 			size += getBasinSize(n);
 		return 1 + size;
