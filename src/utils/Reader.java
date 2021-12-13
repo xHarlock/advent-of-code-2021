@@ -96,7 +96,7 @@ public class Reader {
 		return body.split("\n");
 	}
 	
-	private static String readLine(String file_path) {
+	public static String readLine(String file_path) {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(file_path));

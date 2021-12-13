@@ -15,19 +15,20 @@ public class Day_10 extends AdventDay {
 	private Map<String, String> pairs;
 	/** Cost for each corrupted character */
 	private Map<String, Integer> corrupted;
-	/** Cost for each missing character*/
+	/** Cost for each missing character */
 	private Map<String, Integer> missing;
 	
 	@Override
 	public long part_1() {
 		int score = 0;
-
 		for (String line : input) {
 			Stack<String> expected = new Stack<>();
 			for (String s : line.split("")) {
-				if (pairs.containsKey(s)) // ( [ { <
+				// ( [ { <
+				if (pairs.containsKey(s)) 
 					expected.push(pairs.get(s));
-				else { // ) ] } >
+				// ) ] } >
+				else { 
 					if (!s.equals(expected.pop())) {
 						score += corrupted.get(s);
 						break;

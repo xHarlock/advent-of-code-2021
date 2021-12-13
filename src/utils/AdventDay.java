@@ -1,5 +1,6 @@
 package utils;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,26 @@ public abstract class AdventDay {
 		return copy;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T> T[][] clone(T[][] array) {		
+		T[][] copy = (T[][]) Array.newInstance(array.getClass(), array.length, array[0].length);
+		
+		for (int i = 0; i < array.length; i++)
+			copy[i] = Arrays.copyOf(array[i], array[i].length);
+		
+		return copy;
+	}
+
+	public boolean outOfBounds(int i, int j, int[][] grid) {
+		if (i < 0 || j < 0)
+			return true;
+		if (i >= grid.length)
+			return true;
+		if (j >= grid[i].length)
+			return true;
+		return false;
+	}
+	
 	public void print2DArray(int[][] array) {
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < array[0].length; j++)
